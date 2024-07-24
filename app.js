@@ -7,6 +7,8 @@ const postModel = require('./models/post');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const user = require('./models/user');
+const multerconfig = require('./config/multerconfig');
 
 
 app.set('view engine', 'ejs');
@@ -14,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -66,6 +69,17 @@ app.post('/login', async (req, res) => {
 app.get('/profile', isLoggedIn, async (req, res) => {
     let user = await userModel.findOne({ email: req.user.email });
     res.render('profile', { user });
+});
+
+app.get('/profile/update', isLoggedIn, async(req, res) => {
+    let user = await userModel.findOne({ email: req.user.email });
+    res.render("updateProfile", {user});
+});
+
+app.post("/updateProfile", isLoggedIn ,async(req, res) => {
+ let {username, name, age} = req.body;
+ let user = await userModel.findOneAndUpdate({ email: req.user.email }, req.body, {new: true});
+ res.redirect("/profile");
 });
 
 app.get('/post/create', isLoggedIn, (req, res) => {

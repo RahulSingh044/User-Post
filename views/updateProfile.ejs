@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10">
+        <div class="max-w-md mx-auto bg-white p-8 border border-gray-300 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-6">Update Profile</h2>
+            <form action="/updateProfile" method="post" id="uploadform">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded-md" id="username" name="username" placeholder="" value="<%= user.username  %>">
+                </div>
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded-md" id="name" name="name" placeholder="" value="<%= user.name  %>">
+                </div>
+                <div class="mb-4">
+                    <label for="age" class="block text-gray-700 text-sm font-bold mb-2">Age</label>
+                    <input type="number" class="w-full p-2 border border-gray-300 rounded-md" id="age" name="age" min="0" value="<%= user.age  %>">
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</body>
+<!-- <script>
+    document.querySelector("#uploadicon").addEventListener("click", function () {
+        document.querySelector("#uploadform input").click();
+    })
+
+    document.querySelector("#uploadform input").addEventListener("change", function () {
+        document.querySelector("#uploadform").submit();
+    })
+</script> -->
+</html>
