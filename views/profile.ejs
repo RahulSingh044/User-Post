@@ -18,8 +18,21 @@
                 class="fa-solid fa-right-from-bracket"></i></a>
 
         <div class="flex flex-col items-center">
-            <img class="w-24 h-24 rounded-full shadow-lg mb-4" src="https://i.pinimg.com/736x/a0/16/54/a016541985391c7c0d06995ec9779ab4.jpg"
-                alt="Profile Picture">
+            <form id="uploadform" action="/profileImage" method="post" enctype="multipart/form-data">
+                <input hidden type="file" name="image">
+            </form>
+            <div class="relative">
+                <div>
+                    <span id="uploadicon" class="bg-white absolute right-0 cursor-pointer
+                    bottom-2 rounded-full text-md p-2">
+                        <i class="fa-solid fa-pencil"></i>
+                    </span>
+                    <div class="overflow-hidden">
+                        <img class="w-24 h-24 object-cover  rounded-full shadow-lg mb-4" src="/images/profile/<%= user.profileImage  %>"
+                    alt="Profile Picture">
+                    </div>
+                </div>
+            </div>
             <h2 class="text-2xl font-bold text-gray-900 mb-2">
                 <%= user.name %>
             </h2>
@@ -47,6 +60,14 @@
             </div>
         </div>
     </div>
+    <script>
+        document.querySelector('#uploadicon').addEventListener('click', function () {
+            document.querySelector('#uploadform input').click();
+        })
+        document.querySelector("#uploadform input").addEventListener("change", function () {
+                document.querySelector("#uploadform").submit();
+            })
+    </script>
 </body>
 
 </html>
