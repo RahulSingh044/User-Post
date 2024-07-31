@@ -1,5 +1,10 @@
 const express = require('express');
+const connectDB = require('./config/db');
+require('dotenv').config();
 const app = express();
+
+//connection to Database
+connectDB();
 
 const path = require('path');
 const userModel = require('./models/user');
@@ -12,11 +17,18 @@ const multerconfig = require('./config/multerconfig');
 const upload = require('./config/multerconfig');
 
 
+
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+
+//error handling middle-ware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
 
 
 app.get('/', (req, res) => {
@@ -161,4 +173,7 @@ function isLoggedIn(req, res, next) {
     next();
 }
 
-app.listen(3000);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

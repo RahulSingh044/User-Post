@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/miniProject');
+// const url = 'mongodb://localhost:27017/miniProject'
+
+// mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 const userSchema = mongoose.Schema({
     username: String,
